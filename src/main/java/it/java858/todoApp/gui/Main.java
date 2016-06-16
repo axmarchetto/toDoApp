@@ -5,6 +5,7 @@
  */
 package it.java858.todoApp.gui;
 
+import it.java858.todoApp.entity.Categoria;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -105,7 +106,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuEsciActionPerformed
 
     private void mnuCreaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreaCategoriaActionPerformed
-        CategoriaEdit edit = new CategoriaEdit(null,this, true);
+       Categoria c = new Categoria();
+        CategoriaEdit edit = new CategoriaEdit(c,this, true);
         edit.setLocationRelativeTo(this);
         edit.setVisible(true);
 
