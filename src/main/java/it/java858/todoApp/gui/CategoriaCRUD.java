@@ -42,7 +42,7 @@ public class CategoriaCRUD extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCategorie = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        cmdModifica = new javax.swing.JToggleButton();
         cmdCancella = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -60,7 +60,12 @@ public class CategoriaCRUD extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblCategorie);
 
-        jToggleButton1.setText("Modifica");
+        cmdModifica.setText("Modifica");
+        cmdModifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificaActionPerformed(evt);
+            }
+        });
 
         cmdCancella.setText("Cancella");
         cmdCancella.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +81,7 @@ public class CategoriaCRUD extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToggleButton1)
+                .addComponent(cmdModifica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmdCancella)
                 .addContainerGap())
@@ -87,7 +92,7 @@ public class CategoriaCRUD extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
+                    .addComponent(cmdModifica)
                     .addComponent(cmdCancella))
                 .addGap(0, 59, Short.MAX_VALUE))
         );
@@ -101,7 +106,18 @@ public class CategoriaCRUD extends javax.swing.JDialog {
         categoriaTM.changeData(CategoriaService.findAll());
         
         
+        
     }//GEN-LAST:event_cmdCancellaActionPerformed
+
+    private void cmdModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificaActionPerformed
+       Categoria toEdit = categoriaTM.get(tblCategorie.convertRowIndexToModel(tblCategorie.getSelectedRow())); // TODO add your handling code here:
+       
+       CategoriaEdit editView = new CategoriaEdit(toEdit,this,true);
+       editView.setLocationRelativeTo(this);
+       editView.setVisible(true);
+      
+
+    }//GEN-LAST:event_cmdModificaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,8 +163,8 @@ public class CategoriaCRUD extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton cmdCancella;
+    private javax.swing.JToggleButton cmdModifica;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTable tblCategorie;
     // End of variables declaration//GEN-END:variables
 }

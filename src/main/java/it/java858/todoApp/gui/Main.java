@@ -5,6 +5,9 @@
  */
 package it.java858.todoApp.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author tss
@@ -16,6 +19,12 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        
+        this.setTitle("Gestione to do");
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        //int height = screenSize/2;
+        //int wi
+       
     }
 
     /**
@@ -96,7 +105,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuEsciActionPerformed
 
     private void mnuCreaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreaCategoriaActionPerformed
-        CategoriaEdit edit = new CategoriaEdit(this, true);
+        CategoriaEdit edit = new CategoriaEdit(null,this, true);
         edit.setLocationRelativeTo(this);
         edit.setVisible(true);
 

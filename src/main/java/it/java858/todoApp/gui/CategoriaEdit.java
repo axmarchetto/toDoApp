@@ -15,12 +15,28 @@ import javax.swing.JOptionPane;
  */
 public class CategoriaEdit extends javax.swing.JDialog {
 
+    private Categoria categoria;
+
     /**
      * Creates new form CategoriaEdit
      */
-    public CategoriaEdit(java.awt.Frame parent, boolean modal) {
+    public CategoriaEdit(Categoria categoria, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init (categoria);
+    }
+
+    public CategoriaEdit(Categoria categoria, java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        init (categoria);
+    }
+
+    public void init(Categoria categoria) {
+        //salvo il parametro in una variaBILE DI ISTANZAQ
+        this.categoria = categoria;
+        modelToView();
+        
     }
 
     /**
@@ -100,15 +116,19 @@ public class CategoriaEdit extends javax.swing.JDialog {
     private void cmdSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalvaActionPerformed
         //non so se la categoria è nuova 
         //creo oggetto di tipo categoria
-
-        Categoria newc = new Categoria();
-        newc.setNome(txtNome.getText());
-        CategoriaService.save(newc);
+        viewToModel();
+        CategoriaService.save(categoria);
+        
+        ////versione vecchia
+        //Categoria newc = new Categoria();
+        //newc.setNome(txtNome.getText());
+        //CategoriaService.save(newc);
         JOptionPane.showMessageDialog(this, "categoria salvata"); //this è la finestra su cui lavora 
         close();
 
     }//GEN-LAST:event_cmdSalvaActionPerformed
     // tolgo dalle balle la finestra
+
     private void close() {
         this.setVisible(false);
         this.dispose();
@@ -168,4 +188,17 @@ public class CategoriaEdit extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * visualizza a video le proprietà della categoria 
+     */ 
+    private void modelToView() {
+        txtNome.setText(categoria.getNome());
+    }
+    /**
+     * Salva nella categoria le proprietà a video
+     */
+    private void viewToModel() {
+        categoria.setNome(txtNome.getText());
+    }
 }
