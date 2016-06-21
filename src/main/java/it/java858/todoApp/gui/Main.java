@@ -9,35 +9,45 @@ import it.java858.todoApp.service.CategoriaService;
 
 import it.java858.todoApp.entity.Categoria;
 import it.java858.todoApp.service.CategoriaService;
+import it.java858.todoApp.service.ToDoService;
 import it.java858.todoApp.service.event.CategoriaEventListener;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
  * @author tss
  */
-public class Main extends javax.swing.JFrame implements CategoriaEventListener{
+public class Main extends javax.swing.JFrame implements CategoriaEventListener {
 
-   //private ToDo selectedTodo;
- 
+    //per agganciarlo bisogna creare un table model
+    private ToDoTM todoTM;
+
     /**
      * Creates new form Main
      */
     public Main() {
-         CategoriaService.addCategoriaEventListener(this);
-        
+        CategoriaService.addCategoriaEventListener(this);
+
         initComponents();
-        
+
         this.setTitle("Gestione to do");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        this.setSize(width/2, height/2);
+        this.setSize(width / 2, height / 2);
         //centra il frame sullo schermo 
         this.setLocationRelativeTo(null);
-       
+
+        //mi creo il table model corretto
+        todoTM = new ToDoTM(ToDoService.findAll());
+        //tbltodo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tbltodo.setModel(todoTM);
+
     }
 
     /**
@@ -50,7 +60,7 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener{
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbltodo = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuEsci = new javax.swing.JMenuItem();
@@ -60,7 +70,7 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbltodo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -71,7 +81,7 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbltodo);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -118,8 +128,8 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener{
     }//GEN-LAST:event_mnuEsciActionPerformed
 
     private void mnuCreaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreaCategoriaActionPerformed
-       Categoria c = new Categoria();
-        CategoriaEdit edit = new CategoriaEdit(c,this, true);
+        Categoria c = new Categoria();
+        CategoriaEdit edit = new CategoriaEdit(c, this, true);
         edit.setLocationRelativeTo(this);
         edit.setVisible(true);
 
@@ -172,10 +182,10 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem mnuCreaCategoria;
     private javax.swing.JMenuItem mnuEsci;
     private javax.swing.JMenuItem mnuGestCategorie;
+    private javax.swing.JTable tbltodo;
     // End of variables declaration//GEN-END:variables
 
     @Override

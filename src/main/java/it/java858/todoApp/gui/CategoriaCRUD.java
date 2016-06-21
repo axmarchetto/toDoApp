@@ -26,6 +26,7 @@ public class CategoriaCRUD extends javax.swing.JDialog {
         initComponents();
         //mi creo il table model corretto
         categoriaTM = new CategoriaTM(CategoriaService.findAll());
+        //posso selezionarne una alla volta 
         tblCategorie.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblCategorie.setModel(categoriaTM);
 
