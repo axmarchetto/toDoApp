@@ -8,6 +8,7 @@ package it.java858.todoApp.gui;
 import it.java858.todoApp.service.CategoriaService;
 
 import it.java858.todoApp.entity.Categoria;
+import it.java858.todoApp.entity.ToDo;
 import it.java858.todoApp.service.CategoriaService;
 import it.java858.todoApp.service.ToDoService;
 import it.java858.todoApp.service.event.CategoriaEventListener;
@@ -61,6 +62,9 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbltodo = new javax.swing.JTable();
+        cmdNew = new javax.swing.JButton();
+        cmdEdit = new javax.swing.JButton();
+        cmdDel = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuEsci = new javax.swing.JMenuItem();
@@ -70,6 +74,10 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jScrollPane1.setAlignmentX(10.0F);
+        jScrollPane1.setAlignmentY(10.0F);
+
+        tbltodo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tbltodo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -83,7 +91,21 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
         ));
         jScrollPane1.setViewportView(tbltodo);
 
-        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        cmdNew.setText("Crea");
+
+        cmdEdit.setText("Modifica");
+        cmdEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEditActionPerformed(evt);
+            }
+        });
+
+        cmdDel.setText("Cancella");
+        cmdDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDelActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -119,6 +141,35 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(cmdNew)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdDel)
+                .addGap(24, 24, 24))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+        );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmdDel, cmdEdit, cmdNew});
+
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdEdit)
+                    .addComponent(cmdDel)
+                    .addComponent(cmdNew))
+                .addGap(28, 28, 28))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,6 +191,25 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
         crud.setLocationRelativeTo(this);
         crud.setVisible(true);
     }//GEN-LAST:event_mnuGestCategorieActionPerformed
+
+    private void cmdEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditActionPerformed
+        ToDo toEdit =  todoTM.get(tbltodo.convertColumnIndexToModel(tbltodo.getSelectedRow()));
+        
+//bisogna continuare a modificare sulla falsariga di quanto sotto che è stato fatto per l'altra clase
+        
+        
+        
+//        Categoria toEdit = categoriaTM.get(tblCategorie.convertRowIndexToModel(tblCategorie.getSelectedRow())); // TODO add your handling code here:
+//       
+//       CategoriaEdit editView = new CategoriaEdit(toEdit,this,true);
+//       editView.setLocationRelativeTo(this);
+//       editView.setVisible(true);
+      
+    }//GEN-LAST:event_cmdEditActionPerformed
+
+    private void cmdDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdDelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +248,9 @@ public class Main extends javax.swing.JFrame implements CategoriaEventListener {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdDel;
+    private javax.swing.JButton cmdEdit;
+    private javax.swing.JButton cmdNew;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

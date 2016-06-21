@@ -7,8 +7,10 @@ package it.java858.todoApp.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,8 +32,11 @@ public class ToDo implements Serializable{
     private String testo;
     @Temporal(TemporalType.DATE)
     private Date dataCreazione;
-    @ManyToMany
-    private Set<Categoria> categorie;
+    //per default le associazioni uno a molti e molti a molti non vengono caricate 
+    // se invece la lista non è molto lunga allora si puo caricare 
+    // si usa attributo fetch 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Categoria> categorie = new HashSet<>();
 
     public long getId() {
         return id;
