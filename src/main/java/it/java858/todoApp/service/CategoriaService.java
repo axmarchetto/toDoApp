@@ -16,7 +16,9 @@ import javax.persistence.EntityManager;
  * @author tss
  */
 public class CategoriaService {
+    // definizione degli eventi tramite interfaccia
 
+    //si mettono in memoria gli oggetti che poi si mettono in ascolto dell'evento 
     private static List<CategoriaEventListener> listeners = new ArrayList<>();
 
     public CategoriaService() {
@@ -67,8 +69,9 @@ public class CategoriaService {
     public static void elimina(Categoria c) {
         EntityManager em = DbService.getEm();
         em.getTransaction().begin();
-
-        em.remove(c);
+        // sempre meglio cercare che oggetto esista
+        Categoria find = em.find(Categoria.class, c.getId());
+        em.remove(find);
         em.getTransaction().commit();
 
         //genero evento
