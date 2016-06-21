@@ -6,10 +6,13 @@
 package it.java858;
 
 import com.sun.xml.internal.bind.v2.TODO;
+import it.java858.todoApp.entity.Categoria;
 import it.java858.todoApp.entity.ToDo;
 import it.java858.todoApp.gui.Main;
+import it.java858.todoApp.service.CategoriaService;
 import it.java858.todoApp.service.DbService;
 import it.java858.todoApp.service.ToDoService;
+import it.java858.todoApp.service.event.CategoriaEventListener;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +25,7 @@ import javax.persistence.Persistence;
 public class App {
 
     public static void main(String[] args) {
+        CategoriaService.addCategoriaEventListener(new AscoltaEventiCategoria());
 //        System.out.println("Start jpa");
 //        //crea l'entity manager factory
 ////        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
@@ -42,12 +46,28 @@ public class App {
 ////        em.close();
 //        
 //        ToDoService.save(td);
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
             }
         });
+    }
+}
+
+class AscoltaEventiCategoria implements CategoriaEventListener {
+
+    @Override
+    public void onCreate(Categoria c) {
+        System.out.println("Hai creato la categoria" + c);
+    }
+    @Override
+    public void onUpdate(Categoria c) {
+        System.out.println("Hai aggiornato la categoria" + c);
+    }
+    @Override
+    public void onDelete(Categoria c) {
+        System.out.println("Hai cancellato la categoria" + c);
     }
 }

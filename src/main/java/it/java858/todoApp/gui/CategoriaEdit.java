@@ -123,7 +123,9 @@ public class CategoriaEdit extends javax.swing.JDialog {
         //Categoria newc = new Categoria();
         //newc.setNome(txtNome.getText());
         //CategoriaService.save(newc);
-        JOptionPane.showMessageDialog(this, "categoria salvata"); //this è la finestra su cui lavora 
+        
+        // commento sotto perchè teoricamente avrei creato l'evento che lo gestrisce 
+        //JOptionPane.showMessageDialog(this, "categoria salvata"); //this è la finestra su cui lavora 
         close();
 
     }//GEN-LAST:event_cmdSalvaActionPerformed

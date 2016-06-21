@@ -5,25 +5,38 @@
  */
 package it.java858.todoApp.gui;
 
+import it.java858.todoApp.service.CategoriaService;
+
+import it.java858.todoApp.entity.Categoria;
+import it.java858.todoApp.service.CategoriaService;
+import it.java858.todoApp.service.event.CategoriaEventListener;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author tss
  */
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements CategoriaEventListener{
 
+   //private ToDo selectedTodo;
+ 
     /**
      * Creates new form Main
      */
     public Main() {
+         CategoriaService.addCategoriaEventListener(this);
+        
         initComponents();
         
         this.setTitle("Gestione to do");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //int height = screenSize/2;
-        //int wi
+        int height = screenSize.height;
+        int width = screenSize.width;
+        this.setSize(width/2, height/2);
+        //centra il frame sullo schermo 
+        this.setLocationRelativeTo(null);
        
     }
 
@@ -105,7 +118,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuEsciActionPerformed
 
     private void mnuCreaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCreaCategoriaActionPerformed
-        CategoriaEdit edit = new CategoriaEdit(null,this, true);
+       Categoria c = new Categoria();
+        CategoriaEdit edit = new CategoriaEdit(c,this, true);
         edit.setLocationRelativeTo(this);
         edit.setVisible(true);
 
@@ -163,4 +177,19 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuEsci;
     private javax.swing.JMenuItem mnuGestCategorie;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onCreate(Categoria c) {
+        JOptionPane.showMessageDialog(this, "hai creato una categoria ");
+    }
+
+    @Override
+    public void onUpdate(Categoria c) {
+        JOptionPane.showMessageDialog(this, "hai aggiornato una categoria ");
+    }
+
+    @Override
+    public void onDelete(Categoria c) {
+        JOptionPane.showMessageDialog(this, "hai cancellato una categoria ");
+    }
 }
